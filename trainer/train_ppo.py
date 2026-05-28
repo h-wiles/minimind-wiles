@@ -367,7 +367,7 @@ if __name__ == "__main__":
     # Actor模型
     actor_model, tokenizer = init_model(lm_config, base_weight, device=args.device)
     ref_model, _ = init_model(lm_config, base_weight, device=args.device)
-    ref_model = ref_model.eval().requires_grad_(False)
+    ref_model = ref_model.eval().requires_grad_(False)      # ref model不参与梯度更新
     moe_suffix = '_moe' if lm_config.use_moe else ''
     ckp = f'{args.save_dir}/{base_weight}_{lm_config.hidden_size}{moe_suffix}.pth'
     state_dict = torch.load(ckp, map_location=args.device)
